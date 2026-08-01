@@ -2,7 +2,30 @@
   "name": "skills",
   "version": "1.0.0",
   "private": true,
-  "description": "Colección pública de skills de AutanaSoft",
+  "description": "Public collection of AutanaSoft skills for AI agents.",
+  "license": "MIT",
+  "author": {
+    "name": "AutanaSoft",
+    "url": "https://github.com/AutanaSoft"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AutanaSoft/skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AutanaSoft/skills/issues"
+  },
+  "homepage": "https://github.com/AutanaSoft/skills#readme",
+  "keywords": [
+    "agent-skills",
+    "ai-agents",
+    "typescript",
+    "nestjs",
+    "nextjs",
+    "zod",
+    "drizzle",
+    "workflow"
+  ],
   "scripts": {
     "validate": "bash scripts/validate.sh",
     "format:all": "pnpm format && pnpm lint:markdown",
