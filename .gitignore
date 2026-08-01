@@ -1,0 +1,20 @@
+# Cache local de skills (regenerable)
+.atl/
+
+# SDD artifacts (workspace efímero; la memoria entre sesiones vive en engram)
+openspec/
+
+# CodeGraph index (inteligencia de código local; regenerable con `codegraph init`)
+.codegraph/
+
+# Dependencias de tooling
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp

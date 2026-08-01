@@ -1,0 +1,35 @@
+{
+  "name": "autanasoft-skills",
+  "description": "Public collection of AutanaSoft skills for TypeScript, frameworks, and development workflows.",
+  "owner": {
+    "name": "AutanaSoft",
+    "url": "https://github.com/AutanaSoft"
+  },
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "name": "typescript",
+      "description": "Prácticas de TypeScript, Zod y frameworks (Drizzle, NestJS, Next.js).",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/typescript/ts-general-practices",
+        "./skills/typescript/ts-zodv4-practices",
+        "./skills/typescript/drizzle-practices",
+        "./skills/typescript/nestjs-practices",
+        "./skills/typescript/nextjs-practices"
+      ]
+    },
+    {
+      "name": "workflow",
+      "description": "Skills de flujo de trabajo: SDD lifecycle, PDR intake y Conventional Commits.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/workflow/sdd-lifecycle",
+        "./skills/workflow/pdr-intake",
+        "./skills/workflow/commit-message"
+      ]
+    }
+  ]
+}
