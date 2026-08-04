@@ -5,7 +5,8 @@ corregir pruebas E2E reales en aplicaciones NestJS. La skill debe comprobar el s
 desde HTTP hasta la persistencia, controlar el orden mediante dos niveles de orquestación y permitir
 dobles únicamente en adaptadores de servicios externos explícitamente delimitados.
 
-> Estado: planificación. Este documento no implementa todavía la skill.
+> Estado: implementación finalizada y aceptación formal confirmada; triggering validado y optimizado
+> en OpenCode.
 
 ## Ruta rápida
 
@@ -975,17 +976,22 @@ afectar sus archivos, si se necesita revisar la migración.
 - [x] Crear `evals/evals.json` con casos realistas.
 - [x] Ejecutar runs con skill y baseline simultáneamente.
 - [x] Definir assertions objetivas.
-- [ ] Capturar tiempos y tokens.
-- [ ] Generar grading y benchmark.
-- [ ] Generar el viewer oficial de `skill-creator`.
-- [ ] Recoger revisión humana e iterar si aporta mejora generalizable.
-- [ ] Evaluar y optimizar triggering con positivos y near-misses.
+- [ ] Capturar tiempos y tokens (el runtime no los expuso; la limitación quedó documentada en el
+      benchmark).
+- [x] Generar grading y benchmark en el workspace externo
+      `../nestjs-e2e-practices-workspace/iteration-1/`.
+- [x] Generar el viewer oficial de `skill-creator` en
+      `../nestjs-e2e-practices-workspace/iteration-1/review.html`.
+- [x] Recoger revisión humana; el usuario aceptó los resultados iniciales y la iteración de OpenCode
+      añadió un límite generalizable para APIs desplegadas sin acceso al código.
+- [x] Evaluar y optimizar triggering con positivos y near-misses en OpenCode `1.18.4`: `20/20` en 60
+      runs; el loop oficial de Claude no aplica a este entorno.
 
 ### Cierre
 
 - [x] Ejecutar ambos validadores enfocados.
 - [x] Ejecutar `pnpm validate`.
 - [x] Confirmar matriz de trazabilidad.
-- [ ] Confirmar criterios de aceptación.
+- [x] Confirmar criterios de aceptación; aceptación formal recibida del usuario.
 - [x] Revisar diff completo y preservar cambios ajenos.
 - [x] Entregar resultados y riesgos residuales sin commit automático.

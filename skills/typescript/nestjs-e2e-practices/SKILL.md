@@ -1,12 +1,13 @@
 ---
 name: nestjs-e2e-practices
 description: >
-  Design, implement, review, and repair real HTTP end-to-end tests for NestJS applications. Use when
-  working on NestJS E2E suites, production-like test bootstrap, Jest discovery, main or feature
-  orchestrators, deterministic execution, isolated real databases, migrations, HTTP-created
-  fixtures, real authentication, public API contracts, teardown, or controlled doubles for external
-  services such as email providers. Do not use for unit tests, non-NestJS E2E tests, or browser-only
-  UI testing.
+  Design, implement, review, and repair real HTTP end-to-end tests for source-accessible NestJS
+  applications. Use when working on NestJS E2E suites, production-like test bootstrap, Jest
+  discovery, main or feature orchestrators, deterministic execution, isolated real databases,
+  migrations, HTTP-created fixtures, real authentication, public API contracts, teardown, or
+  controlled doubles for external services such as email providers. Do not use for unit tests,
+  repository-only integration tests, black-box tests against deployed APIs without NestJS source
+  access, non-NestJS E2E tests, or browser-only UI testing.
 license: MIT
 metadata:
   author: AutanaSoft
@@ -27,8 +28,8 @@ sources.
 - Create fixtures, validation cases, authentication flows, and public contract assertions.
 - Isolate an external email, payment, SMS, webhook, or similar out-of-process dependency.
 
-Do not apply this skill to unit tests, repository-only integration tests, non-NestJS APIs, or
-browser-only UI testing.
+Do not apply this skill to unit tests, repository-only integration tests, black-box tests against
+deployed APIs without NestJS source access, non-NestJS APIs, or browser-only UI testing.
 
 ## Hard Rules
 
