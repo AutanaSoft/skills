@@ -33,6 +33,7 @@ Do not install both modes in the same project. They create duplicate copies of t
 | `ts-zodv4-practices`   | Zod 4 validation, shared contracts, parse/safeParse, schema composition.          |
 | `drizzle-practices`    | Schemas, migrations, transactions, persistence contracts.                         |
 | `nestjs-practices`     | Modules, services, repositories, DI, logging, standalone apps.                    |
+| `nestjs-e2e-practices` | Real HTTP E2E, Jest orchestration, isolated databases, fixtures, API contracts.   |
 | `nextjs-practices`     | App Router, Server Components, route handlers, server actions.                    |
 
 ### workflow

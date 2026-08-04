@@ -11,27 +11,13 @@ and maintenance.
 
 ## Domains and Prefixes
 
-| Prefix      | Domain                                             |
-| ----------- | -------------------------------------------------- |
-| `test-e2e-` | Real HTTP E2E testing decisions                    |
-| `config-`   | Configuration placement, validation, and injection |
-| `arch-`     | Application structure and process boundaries       |
-| `error-`    | Errors and observability                           |
-| `api-`      | External service contracts                         |
-| `nestjs-`   | NestJS and Drizzle integration                     |
-
-## E2E Cards
-
-- `references/test-e2e-replicate-production-bootstrap.md` - Replicate the production bootstrap in
-  E2E tests
-- `references/test-e2e-use-real-dependencies.md` - Exercise real application dependencies in E2E
-  tests
-- `references/test-e2e-own-shared-context-lifecycle.md` - Own shared E2E context and lifecycle in
-  the orchestrator
-- `references/test-e2e-organize-suites-by-size.md` - Organize E2E suites by flow and discovery rules
-- `references/test-e2e-derive-invalid-payloads.md` - Derive invalid E2E payloads from canonical
-  valid constants
-- `references/test-e2e-assert-public-contracts.md` - Assert explicit public contracts in E2E tests
+| Prefix    | Domain                                             |
+| --------- | -------------------------------------------------- |
+| `config-` | Configuration placement, validation, and injection |
+| `arch-`   | Application structure and process boundaries       |
+| `error-`  | Errors and observability                           |
+| `api-`    | External service contracts                         |
+| `nestjs-` | NestJS and Drizzle integration                     |
 
 ## Configuration Cards
 
@@ -70,3 +56,5 @@ and maintenance.
 2. Add or update an atomic card in `references/`.
 3. Use an accepted impact, at most four tags, focused examples, and an official HTTPS source.
 4. Update `SKILL.md` and this inventory when the catalog changes.
+
+Use the separate `nestjs-e2e-practices` skill for end-to-end testing guidance.

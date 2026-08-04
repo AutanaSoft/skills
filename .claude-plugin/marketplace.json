@@ -17,6 +17,7 @@
         "./skills/typescript/ts-zodv4-practices",
         "./skills/typescript/drizzle-practices",
         "./skills/typescript/nestjs-practices",
+        "./skills/typescript/nestjs-e2e-practices",
         "./skills/typescript/nextjs-practices"
       ]
     },
