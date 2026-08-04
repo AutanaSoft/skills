@@ -24,7 +24,16 @@ factory owns the authoritative validation for its namespace. A global `validate`
 `ConfigModule.forRoot` is optional and complementary: use it for cross-namespace invariants, shared
 globals, aggregate reporting, or an established project convention, never to duplicate a namespace
 schema. Configuration contracts should be read-only. Do not put request data, domain state, or
-mutable runtime settings in a bootstrap configuration namespace.
+mutable runtime settings in a bootstrap configuration namespace. Express that immutability through
+`Readonly<T>` or readonly properties; do not require runtime freezing. Use `Object.freeze` or a
+validator feature that freezes output only when the project explicitly needs that runtime guarantee.
+
+Export a named factory that constructs and validates the complete namespace. Register that factory
+with `registerAs` under a stable semantic namespace, assign the registered configuration to a named
+constant, and export the registered namespace as the module default. This explicit split identifies
+the construction boundary, keeps construction separate from registration, makes the namespace
+visible, supports reuse and inspection, keeps configuration files uniform, and lets consumers import
+the registered namespace with a default import.
 
 **Incorrect (returns partial environment input and uses truthiness for a default):**
 
@@ -37,24 +46,26 @@ export default registerAs('payments', () => ({
 }));
 ```
 
+This couples construction to registration and hides the construction boundary. It also uses an
+anonymous factory, can return a partial object, treats an empty override as absent, skips final
+validation, and leaves the final contract implicit.
+
 **Correct (builds the complete namespace and validates it once at the boundary):**
 
 ```typescript
 import { registerAs } from '@nestjs/config';
 import { z } from 'zod';
 
-export const paymentsSchema = z
-  .object({
-    apiUrl: z.string().url(),
-    timeoutMs: z.number().int().positive(),
-    requestPath: z.string().startsWith('/'),
-    endpoint: z.string().url(),
-  })
-  .readonly();
+const paymentsConfigSchema = z.object({
+  apiUrl: z.string().url(),
+  timeoutMs: z.number().int().positive(),
+  requestPath: z.string().startsWith('/'),
+  endpoint: z.string().url(),
+});
 
-export type PaymentsConfig = Readonly<z.infer<typeof paymentsSchema>>;
+export type PaymentsConfig = Readonly<z.infer<typeof paymentsConfigSchema>>;
 
-export default registerAs('payments', (): PaymentsConfig => {
+export const paymentsConfigFactory = (): PaymentsConfig => {
   const apiUrlOverride = process.env.PAYMENTS_API_URL;
   const pathOverride = process.env.PAYMENTS_PATH;
   const timeoutOverride = process.env.PAYMENTS_TIMEOUT_MS;
@@ -70,8 +81,12 @@ export default registerAs('payments', (): PaymentsConfig => {
     endpoint: apiUrl === undefined ? undefined : `${apiUrl.replace(/\/$/, '')}${requestPath}`,
   };
 
-  return paymentsSchema.parse(candidate);
-});
+  return paymentsConfigSchema.parse(candidate);
+};
+
+const paymentsConfig = registerAs<PaymentsConfig>('payments', paymentsConfigFactory);
+
+export default paymentsConfig;
 ```
 
 Register the namespace in the application context described by
@@ -82,4 +97,5 @@ and inject it through the typed contract described by
 References:
 
 - [NestJS Configuration](https://docs.nestjs.com/techniques/configuration)
+- [`registerAs` declaration in `@nestjs/config` 4.0.4](https://unpkg.com/@nestjs/config@4.0.4/dist/utils/register-as.util.d.ts)
 - [Zod documentation](https://zod.dev/)

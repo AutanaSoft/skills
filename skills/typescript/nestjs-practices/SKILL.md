@@ -7,8 +7,10 @@ description: >
   external contracts, data integration, and standalone application contexts. Use this skill whenever
   organizing NestJS configuration, reviewing @nestjs/config usage, creating typed configuration
   namespaces, separating worker and API configuration, validating dynamic module options, isolating
-  process.env access, or handling secrets. Also use it for broader NestJS architecture and runtime
-  work. Use nestjs-e2e-practices instead for end-to-end test design or review.
+  process.env access, handling secrets, or performing broader NestJS architecture and runtime work.
+  Do not use this skill for end-to-end test design, test-runner orchestration, E2E fixtures, E2E
+  infrastructure lifecycle, or black-box testing against a deployed API without NestJS source
+  access.
 license: MIT
 metadata:
   author: AutanaSoft
@@ -25,7 +27,9 @@ examples, exceptions, and sources; this entry point activates the catalog and ro
 - Load this skill for NestJS modules, services, repositories, dependency injection, configuration,
   bootstrap, logging and errors, external contracts, data integration, or standalone application
   contexts.
-- Use `nestjs-e2e-practices` for end-to-end test design, implementation, review, or repair.
+- Do not load it for end-to-end test design, test-runner orchestration, E2E fixtures, or E2E
+  infrastructure lifecycle.
+- Do not activate it for black-box testing against a deployed API without NestJS source access.
 - Do not activate it for generic TypeScript work that has no NestJS-specific decision.
 
 ## Workflow
@@ -37,13 +41,13 @@ examples, exceptions, and sources; this entry point activates the catalog and ro
 
 ## Rule Categories by Priority
 
-| Priority                                          | Prefix    | Use for                                                                                       |
-| ------------------------------------------------- | --------- | --------------------------------------------------------------------------------------------- |
-| Critical boundary and integration risk            | `api-`    | External service input and output contracts                                                   |
-| High configuration and framework integration risk | `config-` | Configuration placement, validation, registration, injection, environment access, and secrets |
-| High application design risk                      | `arch-`   | Coordinators, service boundaries, repositories, and standalone contexts                       |
-| High diagnostics risk                             | `error-`  | Structured logging and safe caught-error handling                                             |
-| High NestJS data integration risk                 | `nestjs-` | Drizzle database module wiring and lifecycle                                                  |
+| Priority                                          | Prefix    | Use for                                                                                                  |
+| ------------------------------------------------- | --------- | -------------------------------------------------------------------------------------------------------- |
+| Critical boundary and integration risk            | `api-`    | External service input and output contracts                                                              |
+| High configuration and framework integration risk | `config-` | Configuration ownership, construction, validation, registration, injection, dynamic options, and secrets |
+| High application design risk                      | `arch-`   | Coordinators, service boundaries, repositories, and standalone contexts                                  |
+| High diagnostics risk                             | `error-`  | Structured logging and safe caught-error handling                                                        |
+| High NestJS data integration risk                 | `nestjs-` | Drizzle database module wiring and lifecycle                                                             |
 
 ## Quick Reference
 
