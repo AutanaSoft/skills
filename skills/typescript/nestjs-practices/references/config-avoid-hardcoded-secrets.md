@@ -32,13 +32,13 @@ const paymentsConfig = {
 ```typescript
 import { z } from 'zod';
 
-const paymentsSchema = z
-  .object({
-    apiKey: z.string().min(1),
-  })
-  .readonly();
+const paymentsSchema = z.object({
+  apiKey: z.string().min(1),
+});
 
-export function loadPaymentsConfig() {
+type PaymentsConfig = Readonly<z.infer<typeof paymentsSchema>>;
+
+export function loadPaymentsConfig(): PaymentsConfig {
   const candidate = {
     apiKey: process.env.PAYMENTS_API_KEY,
   };
@@ -50,6 +50,10 @@ export function loadPaymentsConfig() {
   }
 }
 ```
+
+This simplified example demonstrates the boundary that prevents secret exposure; it is not a
+universal error-handling policy. When a project needs structured diagnostics or causal chains,
+preserve the original cause through its sanitized error mechanism while excluding secret values.
 
 Keep construction and final validation in
 [Build and validate namespaced configuration](./config-build-and-validate-namespaced-configuration.md),

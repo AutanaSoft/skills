@@ -50,18 +50,17 @@ import { z } from 'zod';
 
 export const PAYMENTS_OPTIONS = Symbol('PAYMENTS_OPTIONS');
 
-const paymentsModuleOptionsSchema = z
-  .object({
-    apiUrl: z.string().url(),
-    timeoutMs: z.number().int().positive().default(5_000),
-  })
-  .readonly();
+const paymentsModuleOptionsSchema = z.object({
+  apiUrl: z.string().url(),
+  timeoutMs: z.number().int().positive().default(5_000),
+});
 
 type PaymentsModuleOptionsInput = Readonly<z.input<typeof paymentsModuleOptionsSchema>>;
 type PaymentsModuleOptions = Readonly<z.infer<typeof paymentsModuleOptionsSchema>>;
 
-const validatePaymentsOptions = (options: PaymentsModuleOptionsInput): PaymentsModuleOptions =>
-  paymentsModuleOptionsSchema.parse(options);
+const validatePaymentsOptions = (options: PaymentsModuleOptionsInput): PaymentsModuleOptions => {
+  return paymentsModuleOptionsSchema.parse(options);
+};
 
 @Module({})
 export class PaymentsModule {
@@ -77,9 +76,16 @@ export class PaymentsModule {
 }
 ```
 
-For `forRootAsync`, make its provider await the resolved factory result and call
-`validatePaymentsOptions` before returning the `PAYMENTS_OPTIONS` value. The same validator must own
-both synchronous and asynchronous registration paths.
+For `forRootAsync`, make its provider await the resolved factory result and pass it through the same
+validator before returning the `PAYMENTS_OPTIONS` value:
+
+```typescript
+const validatedOptions = validatePaymentsOptions(resolvedOptions);
+```
+
+The same validator must own both synchronous and asynchronous registration paths. Keep the accepted
+input, validated result, and registered token distinct so internal providers receive only the final
+read-only contract and do not repeat validation.
 
 References:
 

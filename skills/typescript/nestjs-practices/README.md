@@ -11,13 +11,13 @@ and maintenance.
 
 ## Domains and Prefixes
 
-| Prefix    | Domain                                             |
-| --------- | -------------------------------------------------- |
-| `config-` | Configuration placement, validation, and injection |
-| `arch-`   | Application structure and process boundaries       |
-| `error-`  | Errors and observability                           |
-| `api-`    | External service contracts                         |
-| `nestjs-` | NestJS and Drizzle integration                     |
+| Prefix    | Domain                                                                                                                     |
+| --------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `config-` | Configuration ownership, construction, validation, registration, injection, external sources, dynamic options, and secrets |
+| `arch-`   | Application structure and process boundaries                                                                               |
+| `error-`  | Errors and observability                                                                                                   |
+| `api-`    | External service contracts                                                                                                 |
+| `nestjs-` | NestJS and Drizzle integration                                                                                             |
 
 ## Configuration Cards
 
@@ -62,4 +62,4 @@ in the implementation plan; do not add aliases or duplicate guidance when extend
 3. Use an accepted impact, at most four tags, focused examples, and an official HTTPS source.
 4. Update `SKILL.md` and this inventory when the catalog changes.
 
-Use the separate `nestjs-e2e-practices` skill for end-to-end testing guidance.
+End-to-end testing conventions are outside this catalog's scope.
