@@ -1,40 +1,62 @@
 ---
-title: Avoid hardcoded secrets
+title: Keep secrets out of source and diagnostics
 impact: CRITICAL
-impactDescription: Prevents credential exposure through source control and deployments
+impactDescription:
+  Prevents credential disclosure through source code, defaults, logs, errors, or serialized
+  configuration.
 tags: nestjs, configuration, secrets, security
 ---
 
-## Avoid hardcoded secrets
+## Keep secrets out of source and diagnostics
 
-**Impact: CRITICAL (prevents credential exposure through source control and deployments)**
+**Impact: CRITICAL (prevents credential disclosure through source code, defaults, logs, errors, or
+serialized configuration)**
 
-Do not place passwords, API keys, tokens, or private keys in source code. Load them from validated
-runtime configuration so repositories and deployed artifacts do not contain credentials.
+Never hardcode passwords, API keys, tokens, private keys, or usable credential-like defaults. Use
+the repository's established environment or external secret provider and validate presence and
+format at the configuration boundary. Do not serialize a namespace or `process.env` wholesale, and
+do not include secret values in logs or exceptions. A safe diagnostic may identify the variable or
+provider path, expected type, or failed constraint without revealing the value. Sanitize structured
+data before logging it.
 
-**Incorrect (embeds an API key in source code):**
-
-```typescript
-const client = new PaymentClient({
-  apiKey: 'sk_live_example',
-});
-```
-
-**Correct (receives the key from validated configuration):**
+**Incorrect (uses an unsafe credential-like fallback):**
 
 ```typescript
-type PaymentConfig = {
-  apiKey: string;
+const paymentsConfig = {
+  apiKey: process.env.PAYMENTS_API_KEY ?? 'change-me',
 };
-
-const createClient = (config: PaymentConfig) =>
-  new PaymentClient({
-    apiKey: config.apiKey,
-  });
 ```
 
-The value must come from validated configuration as described in
-[Validate environment with Zod](./config-validate-environment-with-zod.md).
+**Correct (requires the external value and reports only safe metadata):**
 
-Reference:
-[OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
+```typescript
+import { z } from 'zod';
+
+const paymentsSchema = z
+  .object({
+    apiKey: z.string().min(1),
+  })
+  .readonly();
+
+export function loadPaymentsConfig() {
+  const candidate = {
+    apiKey: process.env.PAYMENTS_API_KEY,
+  };
+
+  try {
+    return paymentsSchema.parse(candidate);
+  } catch {
+    throw new Error('Invalid payments configuration: PAYMENTS_API_KEY is missing or malformed');
+  }
+}
+```
+
+Keep construction and final validation in
+[Build and validate namespaced configuration](./config-build-and-validate-namespaced-configuration.md),
+and isolate external secret providers with
+[Isolate external configuration sources](./config-isolate-external-configuration-sources.md).
+
+References:
+
+- [NestJS Configuration](https://docs.nestjs.com/techniques/configuration)
+- [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)

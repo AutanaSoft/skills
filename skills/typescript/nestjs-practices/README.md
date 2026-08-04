@@ -21,13 +21,18 @@ and maintenance.
 
 ## Configuration Cards
 
-- `references/config-place-files-under-src-config.md` - Place configuration files under src/config
-- `references/config-use-namespaced-register-as-factories.md` - Use namespaced registerAs factories
-- `references/config-validate-environment-with-zod.md` - Validate environment with Zod
-- `references/config-register-configuration-in-app-module.md` - Register configuration in AppModule
-- `references/config-inject-namespaced-configuration.md` - Inject namespaced configuration
-- `references/config-prevent-direct-environment-access.md` - Prevent direct environment access
-- `references/config-avoid-hardcoded-secrets.md` - Avoid hardcoded secrets
+| Card                                                    | Purpose                                                                    |
+| ------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `config-locate-configuration-by-ownership`              | Choose a location from repository conventions and architectural ownership. |
+| `config-build-and-validate-namespaced-configuration`    | Build complete namespaces and validate their final shape.                  |
+| `config-register-configuration-per-application-context` | Load only the namespaces required by each application context.             |
+| `config-inject-namespaced-configuration`                | Inject typed, read-only namespace contracts.                               |
+| `config-isolate-external-configuration-sources`         | Keep consumers independent from environment and secret providers.          |
+| `config-validate-dynamic-module-options`                | Validate `forRoot` and `forRootAsync` inputs at registration.              |
+| `config-avoid-hardcoded-secrets`                        | Prevent secret leakage in source, defaults, logs, and errors.              |
+
+The configuration catalog uses one normative owner per decision. Historical migration details remain
+in the implementation plan; do not add aliases or duplicate guidance when extending the catalog.
 
 ## Architecture Cards
 
