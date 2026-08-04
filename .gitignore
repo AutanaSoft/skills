@@ -1,5 +1,6 @@
 # Cache local de skills (regenerable)
 .atl/
+.tmp/
 
 # SDD artifacts (workspace efímero; la memoria entre sesiones vive en engram)
 openspec/
