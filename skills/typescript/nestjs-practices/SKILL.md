@@ -41,13 +41,13 @@ examples, exceptions, and sources; this entry point activates the catalog and ro
 
 ## Rule Categories by Priority
 
-| Priority                                          | Prefix    | Use for                                                                                       |
-| ------------------------------------------------- | --------- | --------------------------------------------------------------------------------------------- |
-| Critical boundary and integration risk            | `api-`    | External service input and output contracts                                                   |
-| High configuration and framework integration risk | `config-` | Configuration placement, validation, registration, injection, environment access, and secrets |
-| High application design risk                      | `arch-`   | Coordinators, service boundaries, repositories, and standalone contexts                       |
-| High diagnostics risk                             | `error-`  | Structured logging and safe caught-error handling                                             |
-| High NestJS data integration risk                 | `nestjs-` | Drizzle database module wiring and lifecycle                                                  |
+| Priority                                          | Prefix    | Use for                                                                                                     |
+| ------------------------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------- |
+| Critical boundary and integration risk            | `api-`    | External service input and output contracts                                                                 |
+| High configuration and framework integration risk | `config-` | Configuration ownership, construction, validation, registration, injection, dynamic options, and secrets   |
+| High application design risk                      | `arch-`   | Coordinators, service boundaries, repositories, and standalone contexts                                     |
+| High diagnostics risk                             | `error-`  | Structured logging and safe caught-error handling                                                           |
+| High NestJS data integration risk                 | `nestjs-` | Drizzle database module wiring and lifecycle                                                                |
 
 ## Quick Reference
 
