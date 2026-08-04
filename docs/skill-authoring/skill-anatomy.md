@@ -292,7 +292,8 @@ wording and still satisfy the skill contract.
 Re-run behavioral evaluations whenever rules, examples, workflow, ownership, output expectations, or
 reference structure change.
 
-When merging cards, add or update evaluations that protect behavior inherited from every source card.
+When merging cards, add or update evaluations that protect behavior inherited from every source
+card.
 
 ## README Responsibility
 
