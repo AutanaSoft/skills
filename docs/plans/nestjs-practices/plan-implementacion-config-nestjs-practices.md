@@ -55,9 +55,9 @@ La implementación deberá trabajar con estas fuentes, en este orden:
 1. `AGENTS.md`.
 2. Skill global `~/.agents/skills/skill-creator`.
 3. Registro de decisiones aprobado para las reglas `config-`.
-4. `docs/skill-authoring/skill-anatomy.md`.
-5. `docs/skill-authoring/skill-template.md`.
-6. `docs/skill-authoring/reference-card-template.md`.
+4. `docs/skill-development/skill-development-guide.md`.
+5. `docs/skill-development/skill-template.md`.
+6. `docs/skill-development/reference-card-template.md`.
 7. Estado actual de:
    - `skills/typescript/nestjs-practices/SKILL.md`;
    - `skills/typescript/nestjs-practices/README.md`;
@@ -136,7 +136,7 @@ unidad de trabajo para no dejar referencias rotas.
 
 1. Leer `AGENTS.md` completo.
 2. Cargar `~/.agents/skills/skill-creator`.
-3. Leer `skill-anatomy.md`, `skill-template.md` y `reference-card-template.md`.
+3. Leer `skill-development-guide.md`, `skill-template.md` y `reference-card-template.md`.
 4. Leer `SKILL.md`, `README.md` y todas las tarjetas `config-*` actuales.
 5. Revisar el estado de Git para detectar cambios locales.
 6. Tratar cualquier diferencia no generada durante esta implementación como intencional.
@@ -213,7 +213,7 @@ Todas deben cumplir el template de reference cards:
 - título idéntico al H2;
 - impacto permitido;
 - `impactDescription` presente;
-- máximo cuatro tags lowercase kebab-case;
+- solo los tags necesarios, lowercase y kebab-case, sin un máximo arbitrario;
 - ejemplo `Incorrect` y ejemplo `Correct` sobre la misma decisión;
 - lenguaje declarado en todos los bloques;
 - al menos una referencia HTTPS oficial;

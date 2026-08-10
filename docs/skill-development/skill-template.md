@@ -1,8 +1,8 @@
 # SKILL.md Template
 
 Use this template as the structural foundation for creating or modifying a `SKILL.md` file. Remove
-optional fields and conditional sections that do not apply. For skill construction rules, see
-[Skill Anatomy](./skill-anatomy.md).
+optional fields and conditional sections that do not apply. For skill construction rules, see the
+[Skill Development Guide](./skill-development-guide.md).
 
 ## Skeleton
 

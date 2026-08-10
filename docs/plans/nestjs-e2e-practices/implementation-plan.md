@@ -320,9 +320,10 @@ La skill debe pedir al agente que reporte:
 
 ## 7. Diseño detallado de tarjetas
 
-Todas las tarjetas deberán seguir `docs/skill-authoring/reference-card-template.md`: `title` y H2
-idénticos, impacto permitido, `impactDescription`, máximo cuatro tags, ejemplos incorrecto/correcto
-comparables, bloques con lenguaje y al menos una fuente HTTPS oficial.
+Todas las tarjetas deberán seguir `docs/skill-development/reference-card-template.md`: `title` y H2
+idénticos, impacto permitido, `impactDescription`, solo los tags necesarios sin un máximo
+arbitrario, ejemplos `Incorrect`/`Correct` comparables, bloques con lenguaje y al menos una fuente
+HTTPS oficial.
 
 ### 7.1 `e2e-orchestrate-execution-and-lifecycle.md`
 
@@ -799,7 +800,7 @@ pnpm validate
 
 - Título de frontmatter y H2 coinciden exactamente.
 - Impacto pertenece al conjunto permitido.
-- Hay máximo cuatro tags en kebab-case.
+- Solo se incluyen los tags necesarios, en lowercase y kebab-case, sin un máximo arbitrario.
 - Cada tarjeta contiene razones, límites y ejemplos comparables.
 - Todos los bloques declaran lenguaje.
 - Cada tarjeta cita al menos una fuente oficial HTTPS.

@@ -72,9 +72,9 @@ Antes de modificar cualquier archivo:
 
 1. Leer nuevamente:
 
-   - `docs/skill-authoring/skill-anatomy.md`;
-   - `docs/skill-authoring/skill-template.md`;
-   - `docs/skill-authoring/reference-card-template.md`.
+   - `docs/skill-development/skill-development-guide.md`;
+   - `docs/skill-development/skill-template.md`;
+   - `docs/skill-development/reference-card-template.md`.
 
 2. Leer el estado actual completo de:
 
