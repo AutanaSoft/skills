@@ -1,87 +1,154 @@
-# Portable Authoring Contract
+---
+title: Portable Authoring Contract
+impact: CRITICAL
+impactDescription: Prevents standalone skill authoring from diverging from the canonical contract.
+tags: skill-authoring, portability
+---
 
-Use this fallback when the host does not provide stricter skill-development rules. It contains only
-the decisions required to create and modify a portable skill safely.
+## Portable Authoring Contract
 
-## Package Contract
+This file is the standalone operational transposition of the canonical Skill Development Guide. The
+guide remains the single normative owner in its repository; this copy exists only so the distributed
+skill can apply the same decisions without host files. Host rules may add stricter checks but must
+not weaken portable safety or create a runtime dependency.
 
-Every skill requires `SKILL.md`. Optional resources belong in `agents/`, `references/`, `scripts/`,
-`assets/`, and test or evaluation directories only when they serve a concrete purpose. Use relative
-internal paths. Do not create empty directories, unresolved template tokens, or auxiliary files by
-default.
+### Quick Path
 
-Apply progressive disclosure:
+1. Read applicable host instructions.
+2. For updates, inventory the complete package, links, registrations, evals, and current behavior.
+3. Define capability, scope, triggers, exclusions, inputs, outputs, constraints, and realistic uses.
+4. Search for an equivalent skill; create only when no equivalent exists.
+5. Start `SKILL.md` from `assets/skill-template.md`; explicitly choose every optional field and
+   conditional section.
+6. Add reference cards, scripts, assets, README, metadata, or evals only for a concrete purpose.
+7. Validate portable behavior, then applicable host checks, and report omissions exactly.
 
-1. Discovery reads `name` and `description`.
-2. Activation reads `SKILL.md` for selection, workflow, constraints, and navigation.
-3. Execution loads only relevant references or assets and runs necessary scripts.
-4. Evaluation remains outside normal execution context.
+### Package and Disclosure
 
-## Activation and Metadata
+Every package requires `SKILL.md`. Optional `agents/`, `references/`, `scripts/`, `assets/`,
+`evals/`, and `README.md` exist only when useful. Directory and `name` match; internal paths are
+relative. Never ship placeholders, unresolved markers, empty directories, or auxiliary files added
+for completeness.
 
-Use only these supported top-level `SKILL.md` frontmatter fields:
+Progressive disclosure has four levels: discovery reads `name` and `description`; activation reads
+`SKILL.md`; execution loads only relevant references, assets, or scripts; maintainers run evals
+outside normal execution context.
 
-| Field           | Required | Portable contract                                                   |
-| --------------- | -------- | ------------------------------------------------------------------- |
-| `name`          | Yes      | Lowercase kebab-case, at most 64 characters, matching the directory |
-| `description`   | Yes      | Non-empty activation contract, at most 1024 characters              |
-| `license`       | No       | SPDX identifier or relative license path                            |
-| `allowed-tools` | No       | Environment-supported tool restrictions                             |
-| `metadata`      | No       | Maintainer metadata such as author or version                       |
-| `compatibility` | No       | Environment requirements, at most 500 characters                    |
+### Activation and Frontmatter
 
-The description states the work performed and concrete positive triggers. Add exclusions only when
-they prevent likely false activation. Keep it understandable outside its source repository.
+The activation contract states what work belongs, concrete positive triggers, and exclusions that
+prevent likely false activation. It remains understandable when distributed alone. Do not redirect
+to another skill unless an explicit dependency model guarantees it; express exclusions as task
+boundaries.
 
-When `agents/openai.yaml` exists, use quoted strings under `interface`:
+Use only these top-level fields:
 
-```yaml
-interface:
-  display_name: 'Human-readable name'
-  short_description: 'A concise summary between 25 and 64 characters'
-  default_prompt: 'Use $skill-name to perform a representative task.'
+| Field           | Required | Contract                                                              |
+| --------------- | -------- | --------------------------------------------------------------------- |
+| `name`          | Yes      | Kebab-case, at most 64 characters, matching the directory             |
+| `description`   | Yes      | String, at most 1024 characters, describing capability and activation |
+| `license`       | No       | Short identifier or relative license path                             |
+| `allowed-tools` | No       | Environment-supported tool restrictions                               |
+| `metadata`      | No       | Mapping such as `author` or `version`                                 |
+| `compatibility` | No       | Environment or dependency requirement, at most 500 characters         |
+
+Remove inapplicable optional fields. `agents/openai.yaml` is also optional: create it only when the
+user requests it or the host requires it. When present, `interface` contains string values
+`display_name`, `short_description` (25-64 characters), and `default_prompt`, which mentions
+`$<skill-name>`. Metadata generation owns only that file.
+
+### Build `SKILL.md`
+
+Use `assets/skill-template.md` as the structural skeleton. Keep activation, scope, selection,
+general workflow, input constraints, and navigation here, without duplicating detailed normative
+owners.
+
+`When to Apply` is required. Include categories, priorities, exact heading
+`Rule Categories by Priority`, and `Quick Reference` only when rules or decisions are categorized.
+Quick-reference entries use `` `<prefix>-<slug>` - <brief description> ``. Include exact heading
+`How to Use` only when `references/` exists; it explains how to select and load only relevant cards,
+not inventory maintenance. Remove every conditional section that has no decided purpose.
+
+### Reference Cards
+
+Use cards only when detailed rules, examples, exceptions, or edge cases would make `SKILL.md` dense.
+Each card owns one cohesive decision. Split independently activated, failing, changing, or evaluated
+decisions; related cards link to the owner instead of restating it.
+
+Create cards from `assets/reference-card-template.md`. Preserve exact markers `Incorrect`,
+`Correct`, and `Reference`, and include supporting subsections only when required. Every card
+requires:
+
+- `title` exactly matching its only visible H2 heading;
+- impact `CRITICAL`, `HIGH`, `MEDIUM-HIGH`, `MEDIUM`, or `LOW-MEDIUM`;
+- a meaningful `impactDescription` and necessary, unique, lowercase kebab-case tags;
+- specific Incorrect and Correct examples addressing the same written decision;
+- a declared language on every code block;
+- an authoritative HTTPS source when applicable, or an explicit internal-policy justification when
+  no external authority applies.
+
+Examples implement the written rule precisely and must not add stricter security, compatibility,
+runtime, or architecture behavior. State limitations when an example covers only part of a policy.
+
+### Optional Resource Boundaries
+
+- Scripts are deterministic, reusable helpers with documented inputs and outputs, clear safe
+  failure, no hidden environment/network assumptions, and respect for target tooling. They support
+  rather than own normative decisions.
+- Assets are files copied, transformed, or included in output. Explanatory documentation belongs in
+  `SKILL.md` or references.
+- README is optional inventory and maintenance guidance for structure, cards, prefixes, conventions,
+  evals, and contributors. It never solely owns execution rules and stays synchronized with the
+  tree.
+- Evals protect meaningful activation or behavior. Activation cases include positive, negative, and
+  edge requests; behavior assertions verify observable contract rather than exact wording. Rerun
+  them after relevant activation, workflow, ownership, output, example, or structure changes.
+- Keep credentials, tokens, personal data, and secrets out of examples, logs, reports, and test
+  data.
+
+### Modify, Merge, or Retire
+
+Before editing, inventory all affected files, valid behavior, incoming links, registrations, and
+evals; treat differences as intentional. Classify every requirement as preserved, moved, superseded
+with a documented rationale, or intentionally removed with a rationale. Do not lose APIs, ownership
+boundaries, validation, required outputs, exceptions, or consumption patterns while simplifying.
+
+After restructuring, handle obsolete files under host policy; update links, relative paths, Quick
+Reference, How to Use, metadata, README, and evals; then search for stale names, broken links, and
+duplicated rules. Never initialize over an existing skill. Update scripts must preserve unrelated
+and intentional content; use narrow, atomic writes with rollback on failure.
+
+### Validation and Delivery
+
+Run `scripts/quick_validate.py` first. It deterministically checks supported and duplicate fields,
+scalar types and lengths, exact technical headings, every card, tags, code fences, references,
+optional OpenAI metadata, and residual markers. Run affected scripts and tests in temporary
+directories and prove standalone execution. Then run host formatting, linting, validators, links,
+evals, registries, complete diff, and repository-wide checks when available.
+
+Manual review remains mandatory for semantics the validator cannot prove:
+
+- capability, scope, trigger, and exclusion quality;
+- useful selection, workflow, input constraints, and navigation;
+- whether categories, references, scripts, assets, README, metadata, and evals are justified;
+- single normative ownership and cohesive card boundaries;
+- rule/rationale/example agreement, authority quality, and internal-source justification;
+- preservation of intended behavior, links, inventory, secrets policy, and complete diff scope.
+
+Report every omitted command, reason, and unverified behavior. Never report an eval definition as a
+passing execution.
+
+**Incorrect (depends on unavailable host policy or weakens the canonical contract):**
+
+```text
+Load host-only authoring instructions and skip portable validation when they are unavailable.
 ```
 
-The default prompt explicitly names `$<skill-name>`. Regenerating this file must not modify any
-other artifact.
+**Correct (uses the bundled transposition and treats host rules as stricter overlays):**
 
-## Creation
+```text
+Load this package-relative contract, run portable validation, then apply available host checks.
+```
 
-Define capability, scope, triggers, exclusions, inputs, outputs, and concrete requests before naming
-the skill. Search for an equivalent package first. Choose a short verb-led name and use the bundled
-initializer with complete metadata. Customize the generated workflow before delivery.
-
-Add scripts only for deterministic repeated work, assets only for files consumed by outputs, and
-tests or evals only for meaningful protection. A README is optional maintainer inventory, never the
-sole owner of execution rules.
-
-## Modification
-
-Inventory the existing package, incoming links, registrations, tests, and behavior before editing.
-Treat existing content as intentional. Preserve accepted behavior unless the request explicitly
-changes it.
-
-For merges, renames, replacements, or retirement, classify every affected requirement as preserved,
-moved, superseded with rationale, or intentionally removed. Update links, navigation, metadata, and
-evaluations coherently. Search for stale names and duplicated normative rules.
-
-## Reference Cards
-
-Create cards only when detailed rules, exceptions, or examples would make `SKILL.md` dense. Each
-card owns one cohesive decision and uses `assets/reference-card-template.md`.
-
-Require:
-
-- A title matching the visible H2 heading
-- Impact of `CRITICAL`, `HIGH`, `MEDIUM-HIGH`, `MEDIUM`, or `LOW-MEDIUM`
-- A meaningful impact description and necessary lowercase kebab-case tags
-- Focused `Incorrect` and `Correct` examples with declared code languages
-- An authoritative HTTPS reference when one exists, or an explicit internal-policy justification
-- Links to related owners instead of duplicated rules
-
-## Validation
-
-Run the bundled validator and all affected scripts or tests. Confirm directory/name agreement,
-frontmatter fields, metadata coherence, reference-card structure, absence of unresolved template
-tokens, and preservation of unrelated files. Then run host checks when available and report omitted
-checks honestly.
+Reference: Internal policy transposed from the canonical Skill Development Guide; no external
+authority owns these repository-specific authoring decisions.

@@ -2,147 +2,89 @@
 name: manage-skills
 description: >-
   Create, update, restructure, rename, merge, or retire portable agent skills. Use when changing a
-  skill's activation contract, SKILL.md, reference cards, scripts, assets, tests, discovery
-  metadata, or package navigation. Includes standalone templates, initialization, OpenAI metadata
-  generation, validation, and update rules. Do not use for installing third-party skills or
-  unrelated agent configuration.
+  skill's activation contract, SKILL.md, reference cards, scripts, assets, evals, discovery
+  metadata, or package navigation. Includes standalone canonical templates, optional OpenAI
+  metadata, deterministic validation, and safe update rules. Do not use for installing third-party
+  skills or unrelated agent configuration.
 license: Apache-2.0
 metadata:
   author: AutanaSoft
-  version: '1.1.0'
+  version: '1.2.0'
 ---
 
 # Manage Skills
 
-Create and modify skills using only resources shipped in this package. Treat host documentation and
-validators as optional, stricter overlays; absence of host tooling must never block the portable
-workflow.
+Create and modify skills entirely from package-relative resources. The bundled authoring contract is
+the operational authority when host documentation is absent; host rules are stricter overlays only.
 
 ## When to Apply
 
 Use this skill when:
 
-- Creating a skill package in any writable destination
-- Updating an existing skill's behavior, activation, structure, metadata, or resources
-- Adding or changing reference cards, scripts, assets, README files, or evaluations
-- Renaming, merging, replacing, or retiring skill content
-- Synchronizing host navigation or registries after a skill inventory change
+- Creating or changing a portable skill package
+- Renaming, merging, replacing, retiring, validating, or synchronizing skill content
 
-## Resolve Resources
+## How to Use
 
-Resolve every portable resource relative to this `SKILL.md` directory, never from the current
-working directory:
+Resolve these paths relative to this `SKILL.md`, never the current working directory:
 
 ```text
+references/authoring-contract.md
+assets/skill-template.md
+assets/reference-card-template.md
 scripts/init_skill.py
 scripts/generate_openai_yaml.py
 scripts/quick_validate.py
-assets/skill-template.md
-assets/reference-card-template.md
-references/authoring-contract.md
 ```
 
-Read `references/authoring-contract.md` before creating or modifying a skill. Read the
-reference-card section only when detailed rules justify cards. Host instructions may override the
-fallback contract for work inside that host, but they cannot remove portable safety guarantees or
-create an external runtime dependency for this skill.
+Read `references/authoring-contract.md` before any create or update. It owns detailed authoring
+decisions; this file owns only execution order and resource navigation.
 
 ## Workflow
 
-### 1. Discover and select
+1. Read applicable host instructions and inventory the full existing package or target inventory.
+2. Define capability, activation, boundaries, inputs, outputs, and concrete requests; select create
+   or update based on equivalence evidence.
+3. For create, explicitly decide optional frontmatter, categories, references, and host metadata,
+   then run `scripts/init_skill.py --help` and pass only applicable flags. Never initialize an
+   existing path.
+4. For update, classify behavior as preserved, moved, superseded, or intentionally removed. Change
+   narrow owners and preserve unrelated content.
+5. Add cards, scripts, assets, README, metadata, and evals only under their contract boundaries.
+6. Run the bundled validator and portable scripts/tests in temporary directories. Complete the
+   contract's mandatory manual review.
+7. Run applicable host formatting, linting, validators, evals, links, registry, diff, and repository
+   checks. Synchronize host copies only after the source passes.
 
-- Extract the outcome, positive triggers, exclusions, users, inputs, outputs, constraints, and
-  realistic requests.
-- Search the target inventory for an equivalent skill before creating one.
-- Choose `create` only when no equivalent exists. Otherwise choose `update` and explain the match.
-- Read applicable host instructions when present. Do not assume a repository layout or package
-  manager.
-
-### 2. Inventory before update
-
-Inspect the complete existing package before editing: `SKILL.md`, `agents/`, references, scripts,
-assets, README, tests or evals, links, registrations, metadata, and current behavior. Treat every
-existing difference as intentional unless evidence or the request says otherwise.
-
-Classify affected behavior as preserved, moved, superseded with rationale, or intentionally removed.
-Update incoming links and evaluations when behavior or paths change. Never rerun initialization over
-an existing destination.
-
-### 3. Create deterministically
-
-Choose a short verb-led kebab-case name. Run:
+Optional OpenAI metadata is requested explicitly during initialization:
 
 ```bash
 python <skill-root>/scripts/init_skill.py <name> \
-  --path <parent-directory> \
+  --path <parent> \
   --description <activation-contract> \
-  --display-name <display-name> \
-  --short-description <25-to-64-character-summary> \
-  --default-prompt <prompt-containing-$name> \
-  --overview <concise-purpose>
-```
-
-The initializer creates only `SKILL.md` and `agents/openai.yaml`. It rejects an existing destination
-and leaves no placeholders or empty optional directories. Customize the generated workflow, then add
-only resources justified by the capability. Use `assets/reference-card-template.md` when a card is
-needed; do not copy the fallback contract into the target skill.
-
-### 4. Update metadata explicitly
-
-Preserve `agents/openai.yaml` when it remains coherent. Regenerate it only when missing, requested,
-or stale relative to `SKILL.md`:
-
-```bash
-python <skill-root>/scripts/generate_openai_yaml.py <target-skill> \
+  --title <display-title> \
+  --overview <purpose-scope-organization> \
+  --trigger <first-trigger> \
+  --trigger <second-trigger> \
+  --openai-metadata \
   --display-name <display-name> \
   --short-description <25-to-64-character-summary> \
   --default-prompt <prompt-containing-$name>
 ```
 
-The generator owns only `agents/openai.yaml`; it must not rewrite `SKILL.md` or other intentional
-files.
-
-### 5. Apply progressive disclosure
-
-- Keep activation, scope, selection, general workflow, input constraints, and navigation in
-  `SKILL.md`.
-- Assign every normative decision one owner. Link instead of duplicating details.
-- Add reference cards only for independently selectable rules, exceptions, or examples that would
-  make `SKILL.md` dense.
-- Add scripts for deterministic repeated work, assets for output inputs, and tests or evals for
-  meaningful behavior protection.
-- Do not create placeholders, empty directories, or auxiliary documentation without a concrete
-  execution or maintenance purpose.
-
-### 6. Validate portable behavior
-
-Always run the bundled validator first:
-
-```bash
-python <skill-root>/scripts/quick_validate.py <target-skill>
-```
-
-Run affected scripts and tests in temporary directories. Verify creation, metadata regeneration,
-valid and invalid packages, and execution with no host documentation or validators available.
-
-After portable checks pass, discover and run applicable host formatters, linters, validators, tests,
-registry checks, and diff checks. Host checks are additional evidence, not prerequisites for
-portable operation. Report exact omitted commands and resulting uncertainty.
-
-### 7. Synchronize host metadata
-
-When inventory or paths change, inspect the host for registries, marketplace manifests, skill
-tables, incoming links, and evaluations. Update only owners proven applicable. Search for obsolete
-names, stale paths, broken links, and duplicated rules after renames, merges, or retirement.
+Omit the four metadata flags when the host does not require `agents/openai.yaml`. Use
+`--categories`, `--references`, `--license`, `--allowed-tools`, `--author`, `--version`, and
+`--compatibility` only after explicitly deciding they apply.
 
 ## Output Contract
 
 Return:
 
 - `status`: `created`, `updated`, `blocked`, or `failed`
-- `executive_summary`: concise outcome and key design choice
-- `artifacts`: created, changed, removed, and registered paths
-- `next_recommended`: the most useful next action, or `none`
-- `risks`: unresolved risks and omitted validations, or `none`
-- `skill_resolution`: selected `create` or `update`, resolved skill name and path, and equivalence
-  evidence
+- `executive_summary`: outcome and key design choice
+- `artifacts`: exact created, changed, removed, and synchronized paths
+- `commands`: exact validations and results
+- `manual_review`: semantic rules reviewed manually and unresolved findings
+- `next_recommended`: most useful next action, or `none`
+- `risks`: unresolved risks and omitted validation, or `none`
+- `skill_resolution`: create/update choice, resolved name/path, and equivalence evidence

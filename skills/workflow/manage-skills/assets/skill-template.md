@@ -1,21 +1,65 @@
 ---
-name: __MANAGE_SKILLS_NAME__
-description: __MANAGE_SKILLS_DESCRIPTION__
+name: '{{SKILL_NAME}}'
+description: '{{DESCRIPTION}}'
+# MANAGE_SKILLS_LICENSE_BEGIN
+license: '{{LICENSE}}'
+# MANAGE_SKILLS_LICENSE_END
+# MANAGE_SKILLS_ALLOWED_TOOLS_BEGIN
+allowed-tools: '{{ALLOWED_TOOLS}}'
+# MANAGE_SKILLS_ALLOWED_TOOLS_END
+# MANAGE_SKILLS_METADATA_BEGIN
+metadata:
+  author: '{{AUTHOR}}'
+  version: '{{VERSION}}'
+# MANAGE_SKILLS_METADATA_END
+# MANAGE_SKILLS_COMPATIBILITY_BEGIN
+compatibility: '{{COMPATIBILITY}}'
+# MANAGE_SKILLS_COMPATIBILITY_END
 ---
 
-# **MANAGE_SKILLS_DISPLAY_NAME**
+# {{SKILL_TITLE}}
 
-**MANAGE_SKILLS_OVERVIEW**
+{{OVERVIEW}}
 
 ## When to Apply
 
-Use this skill for requests covered by its activation contract. Confirm the requested outcome and
-constraints before changing files or external systems.
+Use this skill when:
 
-## Workflow
+- {{TRIGGER_1}}
+- {{TRIGGER_2}}
 
-1. Inspect relevant inputs and existing behavior.
-2. Select the smallest workflow that satisfies the request.
-3. Preserve intentional work and apply the change.
-4. Validate the observable result with available project tools.
-5. Report changed artifacts, verification, and unresolved risks.
+<!-- MANAGE_SKILLS_CATEGORIES_BEGIN -->
+
+## Rule Categories by Priority
+
+| Priority | Category       | Impact   | Prefix          |
+| -------- | -------------- | -------- | --------------- |
+| 1        | {{CATEGORY_1}} | CRITICAL | `{{PREFIX_1}}-` |
+| 2        | {{CATEGORY_2}} | HIGH     | `{{PREFIX_2}}-` |
+
+## Quick Reference
+
+### 1. {{CATEGORY_1}} (CRITICAL)
+
+- `{{PREFIX_1}}-{{SLUG_1}}` - {{RULE_DESCRIPTION_1}}
+- `{{PREFIX_1}}-{{SLUG_2}}` - {{RULE_DESCRIPTION_2}}
+
+### 2. {{CATEGORY_2}} (HIGH)
+
+- `{{PREFIX_2}}-{{SLUG_3}}` - {{RULE_DESCRIPTION_3}}
+- `{{PREFIX_2}}-{{SLUG_4}}` - {{RULE_DESCRIPTION_4}}
+
+<!-- MANAGE_SKILLS_CATEGORIES_END -->
+
+<!-- MANAGE_SKILLS_REFERENCES_BEGIN -->
+
+## How to Use
+
+Identify the applicable category and read only the relevant reference cards:
+
+```text
+references/{{PREFIX_1}}-{{SLUG_1}}.md
+references/{{PREFIX_2}}-{{SLUG_3}}.md
+```
+
+<!-- MANAGE_SKILLS_REFERENCES_END -->
