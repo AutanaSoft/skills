@@ -75,7 +75,7 @@ expect(mailTransport.messages).toContainEqual(
   expect.objectContaining({
     to: user.email,
     template: 'reset-password',
-  }),
+  })
 );
 ```
 

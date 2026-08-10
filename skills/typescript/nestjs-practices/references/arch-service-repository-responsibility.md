@@ -18,7 +18,7 @@ operations, but cross-domain orchestration belongs in an explicit coordinator.
 class UsersService {
   constructor(
     private users: UsersRepository,
-    private operations: OperationsRepository,
+    private operations: OperationsRepository
   ) {}
 
   updateUser() {

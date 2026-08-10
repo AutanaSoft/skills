@@ -1,10 +1,6 @@
-.atl/
-openspec/
-node_modules/
-*.skill
-coverage/
-.nyc_output/
-htmlcov/
-dist/
-build/
-out/
+# Versioned external skill artifacts; preserve their upstream formatting.
+/.agents/
+/.claude/
+
+# pnpm owns the lockfile formatting.
+pnpm-lock.yaml

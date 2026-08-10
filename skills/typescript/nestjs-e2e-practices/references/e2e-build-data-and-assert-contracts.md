@@ -60,7 +60,7 @@ expect(created.body).toEqual(
   expect.objectContaining({
     id: expect.any(String),
     email: validPayload.email,
-  }),
+  })
 );
 expect(created.body).not.toHaveProperty('password');
 expect(created.body).not.toHaveProperty('passwordHash');

@@ -1,73 +1,71 @@
 # AGENTS
 
-Hard rules for any agent (human or AI) working in this repo without breaking conventions. If any
-rule here conflicts with an installed skill, this file wins. Read it fully before your first edit:
-each section states its scope and limits.
+Mandatory rules for any person or AI agent working in this repository while preserving its
+conventions.
 
-This repository is a collection of [Agent Skills](https://agentskills.io) — folder-based instruction
-sets loaded dynamically by AI agents. Skills live under `skills/<category>/<skill-name>/SKILL.md`
-and MUST comply with the [Agent Skills specification](https://agentskills.io/specification).
+If a rule in this file conflicts with an installed skill, this file prevails.
 
-You are a senior software engineer experienced in authoring skills for AI agents. Your work must
-follow SOLID, Clean Code, and classic design patterns (Strategy, Factory, State Machine, Repository)
-when designing skills, configuration, or tooling in this repo.
+Read this file completely before making the first modification. Each section defines its scope and
+limits.
 
-## Communication with the user
+## Repository Context
 
-- Short, direct replies by default.
-- One question at a time. After asking, STOP and wait.
+- Consult `README.md` when the task requires project overview, prerequisites, or setup instructions.
+- Consult the relevant documentation under `docs/` when the task requires additional context about
+  architecture, conventions, or technical decisions. Do not read unrelated documentation by default.
 
-## Authoring and modifying skills
+## Code Style
 
-- **Creating a new skill**: load the globally installed `skill-creator` skill from
-  `~/.agents/skills/skill-creator` before writing any `SKILL.md`. Its frontmatter contract,
-  activation rules, and reference-loading discipline are the source of truth.
-- **Modifying an existing skill**: load the global `skill-creator` skill and verify the change stays
-  aligned with its contract. The skill's `description` (frontmatter) must still contain triggers
-  that let the agent activate it on its own.
-- The global `skill-creator` skill is intentionally not vendored in this repository. The repository
-  validator remains available at `scripts/quick_validate.py` so validation does not depend on a
-  user's global installation.
-- **Language of generated artifacts**: SKILL.md files, assets, and code examples default to neutral
-  and professional English regardless of the conversation language or the agent's active persona.
-  Any language the user explicitly names is acceptable on explicit request (Spanish is the most
-  common case but the rule is permissive). All output must be neutral and professional; do not
-  introduce regional variants (voseo, slang, dialect-specific grammar) unless the user explicitly
-  asks for them.
-- **Naming**: the skill's `name` (frontmatter) MUST match its directory name. Why: agents locate
-  skills by directory, and `skill-creator`'s `quick_validate.py` enforces this.
-- **Validation**: use the repository validator at `scripts/quick_validate.py` to validate SKILL.md
-  frontmatter, structure and contract. Run `pnpm validate` for the complete repository check.
+- Follow `.editorconfig` for baseline file conventions. For files supported by Prettier, follow
+  `.prettierrc`, which takes precedence for overlapping formatting options.
+- For Markdown and MDX files, run Prettier before `markdownlint-cli2`. Generated or edited Markdown
+  must satisfy `.markdownlint-cli2.jsonc`.
+- Do not manually format generated files unless the project explicitly includes them in its
+  formatting workflow.
+- Respect the linter and static analysis configured by the project; do not introduce warnings.
+- Do not disable formatting, linting, or type rules without a localized, documented justification.
 
-## Commits and pushes
+## Communication
 
-- **Commit**: only if the user asks explicitly.
-- **Push**: only if the user asks explicitly.
+- Respond concisely and directly, using a neutral technical tone. Include enough detail to
+  understand decisions, risks, and outcomes.
+- Ask one blocking question at a time and wait for the response before continuing. When a workflow
+  provides a grouped or atomic decision set, present it completely without splitting it.
+- Report blockers, necessary assumptions, and any verification that was not performed. Do not
+  present unverified work as complete.
 
-## Inline comments and documentation
+## Commits and Pushes
 
-- **What to document**: configuration files and SKILL.md sections when the contract is non-obvious.
-  Skip self-explanatory instructions or sections.
-- **Content**: the why (intent, decision, gotcha), not the what.
-- **Code-example blocks left as 'discarded alternative' in SKILL.md**: forbidden; use active
-  examples or remove them.
-- **Emojis**: forbidden in code, commits, PRs, issues, documentation, and chat replies.
+- Do not create or generate commits without an explicit user request.
+- Do not push without an explicit user request.
+- When preparing a commit, use the `commit-message` skill if it is available.
 
-## Verification of technical claims
+## Comments and Documentation
 
-- Do not assume APIs, conventions, or memory behavior. Verify against official documentation before
-  writing or modifying code.
-- Cite the source (docs URL + package version) on non-obvious technical claims.
-- If the user flags something as incorrect: verify against the docs before accepting or rejecting.
-  Memory and "probably" are not evidence.
+- Document exports when their contract is not evident; omit self-explanatory helpers and one-liners.
+- Explain intent, decision, or limitation, not a literal description of the code.
+- Do not keep commented-out code; Git history preserves prior versions.
 
-## User changes to generated code
+## Planning and Verification
 
-- **Assume intent**: any difference between what you generated and what is in the repo is, by
-  default, intentional.
-- **No revert without confirmation**: do not undo, rewrite, or "fix" those changes without explicit
-  confirmation.
-- **How to ask**: if you consider it an error or bug, raise the observation with evidence (URL,
-  line, diff) and ask before touching.
-- **Exception**: if the user explicitly asked to revert or adjust ("go back", "apply this instead of
-  the previous one"), proceed.
+- Before a non-trivial change or when scope is ambiguous, present a plan with the scope, affected
+  files, and steps, then wait for developer approval. An explicit request to implement a clearly
+  scoped change counts as approval. Read-only operations and approved mechanical changes do not
+  require an additional plan.
+- Before starting an RDD review, prepare the intended commit files and run the project's configured
+  `lint-staged` workflow, including all source-mutating formatters and linters normally executed by
+  the pre-commit hook. Start the review only after rerunning that workflow produces no further
+  changes. After the review starts, the actual pre-commit hook must be a no-op for file content and
+  modes; any mutation invalidates the review and requires a new candidate.
+- Do not invent APIs, conventions, or behaviors. Verify against official documentation, cite the URL
+  and version, or ask the developer. Memory and "probably" are not evidence.
+- Do not modify files outside the agreed scope without reporting the reason.
+- If the user questions a technical claim, verify it before accepting or rejecting it.
+
+## User Changes
+
+- Treat any difference between generated code and the repository's current state as intentional.
+- Do not revert, rewrite, or correct those changes without explicit confirmation.
+- If you identify a potential issue, provide verifiable evidence - URL, line, or diff - and request
+  confirmation before changing it.
+- If the user explicitly requests reverting or adjusting a change, proceed within the stated scope.

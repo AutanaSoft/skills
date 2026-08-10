@@ -409,7 +409,7 @@ import paymentsConfig from './config/payments.config';
 export class PaymentsClient {
   constructor(
     @Inject(paymentsConfig.KEY)
-    private readonly config: ConfigType<typeof paymentsConfig>,
+    private readonly config: ConfigType<typeof paymentsConfig>
   ) {}
 
   createRequest(): void {

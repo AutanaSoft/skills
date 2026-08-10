@@ -657,7 +657,7 @@ import paymentsConfig from './config/payments.config';
 export class PaymentsClient {
   constructor(
     @Inject(paymentsConfig.KEY)
-    private readonly config: Readonly<ConfigType<typeof paymentsConfig>>,
+    private readonly config: Readonly<ConfigType<typeof paymentsConfig>>
   ) {}
 }
 ```

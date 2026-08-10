@@ -60,7 +60,7 @@ const paymentsSecretsProvider = {
 export class PaymentsClient {
   constructor(
     @Inject(PAYMENTS_SECRETS)
-    private readonly secrets: PaymentsSecrets,
+    private readonly secrets: PaymentsSecrets
   ) {}
 
   getAuthorizationHeader(): string {
