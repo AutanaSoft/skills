@@ -1,60 +1,35 @@
-# Reference Card Template
+# Plantilla de tarjeta de referencia
 
-Use this template for one rule card in a skill's `references/` directory. For the skill entry point,
-see [Skill Template](./skill-template.md).
+Usa esta base estructural para crear un archivo de tarjeta en `references/`. Para las reglas de
+construcción, consulta la [Anatomía de una skill](./skill-anatomy.md).
 
-## Skeleton
+## Esqueleto
 
 ````markdown
 ---
-title: <Rule Title>
-impact: <CRITICAL | HIGH | MEDIUM | LOW>
-impactDescription: <Brief consequence or scope>
+title: <Título de la regla>
+impact: <CRITICAL | HIGH | MEDIUM-HIGH | MEDIUM | LOW-MEDIUM>
+impactDescription: <Consecuencia o alcance breve>
 tags: <lowercase-kebab-case>, <lowercase-kebab-case>
 ---
 
-## <Rule Title>
+## <Título de la regla>
 
-**Impact: <CRITICAL | HIGH | MEDIUM | LOW> (<Brief consequence or scope>)**
+<Párrafo normativo que define la regla y por qué es importante.>
 
-<Explain the rule and why it matters.>
+**Incorrecto (<descripción específica de cómo se infringe la regla>):**
 
-**Incorrect (<what violates the rule>):**
-
-```typescript
-<Code that violates the rule>
+```<lenguaje>
+<Código que infringe la regla>
 ```
 
-**Correct (<what applies the rule>):**
+**Correcto (<descripción específica de cómo se aplica la regla>):**
 
-```typescript
-<Code that applies the rule>
+```<lenguaje>
+<Código que aplica la regla>
 ```
 
-Reference: [<Official source>](https://example.com)
+<!-- Añade subsecciones o ejemplos complementarios solo cuando la regla lo requiera. -->
+
+Referencia: [<Fuente oficial>](https://example.com)
 ````
-
-## Atomicity
-
-A card contains one primary rule or coherent decision. Related variants and alternatives may stay
-together when they share the same scope, impact, and application criteria.
-
-Split cards when their triggers, impacts, examples, or application conditions are independent. Link
-related cards instead of copying their normative guidance.
-
-## Card Contract
-
-- `title` and the H2 are exactly the same.
-- `impact` is `CRITICAL`, `HIGH`, `MEDIUM`, or `LOW`.
-- `impactDescription` is present and explains the consequence, scope, or reason.
-- Use at most four lowercase kebab-case tags.
-- Include one focused `Incorrect` example and one focused `Correct` example for the same rule.
-- Declare the language on every code block.
-- Include at least one HTTPS reference and prefer official documentation.
-
-## Checklist
-
-- [ ] The card covers one rule or coherent decision.
-- [ ] The frontmatter title matches the H2 exactly.
-- [ ] The examples demonstrate the same decision.
-- [ ] Related guidance is linked rather than duplicated.
