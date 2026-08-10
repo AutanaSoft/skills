@@ -1,0 +1,4 @@
+interface:
+  display_name: "Manage Skills"
+  short_description: "Create and update portable agent skills"
+  default_prompt: "Use $manage-skills to create or update a portable agent skill."

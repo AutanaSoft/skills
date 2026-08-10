@@ -1,0 +1,30 @@
+---
+title: {{TITLE}}
+impact: {{IMPACT}}
+impactDescription: {{IMPACT_DESCRIPTION}}
+tags: {{TAG_1}}, {{TAG_2}}
+---
+
+## {{TITLE}}
+
+{{RULE}}
+
+**Incorrect ({{INCORRECT_DESCRIPTION}}):**
+
+```{{LANGUAGE}}
+{{INCORRECT_EXAMPLE}}
+```
+
+**Correct ({{CORRECT_DESCRIPTION}}):**
+
+```{{LANGUAGE}}
+{{CORRECT_EXAMPLE}}
+```
+
+<!-- MANAGE_SKILLS_SUPPORTING_SECTIONS_BEGIN -->
+
+{{SUPPORTING_SECTIONS}}
+
+<!-- MANAGE_SKILLS_SUPPORTING_SECTIONS_END -->
+
+Reference: [{{REFERENCE_TITLE}}](https://{{REFERENCE_HOST_AND_PATH}})
