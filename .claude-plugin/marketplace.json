@@ -23,13 +23,14 @@
     },
     {
       "name": "workflow",
-      "description": "Skills de flujo de trabajo: SDD lifecycle, PDR intake y Conventional Commits.",
+      "description": "Skills de flujo de trabajo: SDD lifecycle, PDR intake, Conventional Commits y desarrollo de skills.",
       "source": "./",
       "strict": false,
       "skills": [
         "./skills/workflow/sdd-lifecycle",
         "./skills/workflow/pdr-intake",
-        "./skills/workflow/commit-message"
+        "./skills/workflow/commit-message",
+        "./skills/workflow/manage-skills"
       ]
     }
   ]

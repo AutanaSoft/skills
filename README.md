@@ -43,6 +43,7 @@ Do not install both modes in the same project. They create duplicate copies of t
 | `sdd-lifecycle`  | SDD artifact lifecycle (PRD, spec, design, tasks, verify, archive). |
 | `pdr-intake`     | Mature ambiguous ideas into minimum PDRs before starting SDD.       |
 | `commit-message` | Conventional Commits generated from `git diff`.                     |
+| `manage-skills`  | Create and update portable skills with standalone authoring tools.  |
 
 ## Why these skills exist
 
