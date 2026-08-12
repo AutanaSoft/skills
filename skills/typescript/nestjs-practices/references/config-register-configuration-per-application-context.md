@@ -1,7 +1,7 @@
 ---
 title: Register configuration per application context
 impact: HIGH
-impactDescription:
+impactDescription: >-
   Prevents unrelated applications, workers, and commands from sharing an oversized or incorrectly
   initialized configuration graph.
 tags: nestjs, configuration, modules, application-context

@@ -1,7 +1,7 @@
 ---
 title: Validate dynamic module options at registration
 impact: HIGH
-impactDescription:
+impactDescription: >-
   Prevents invalid public module options from reaching internal providers and failing later at
   runtime.
 tags: nestjs, configuration, dynamic-modules, validation
@@ -87,8 +87,9 @@ The same validator must own both synchronous and asynchronous registration paths
 input, validated result, and registered token distinct so internal providers receive only the final
 read-only contract and do not repeat validation.
 
-References:
+Reference: [NestJS Dynamic Modules](https://docs.nestjs.com/fundamentals/dynamic-modules)
 
-- [NestJS Dynamic Modules](https://docs.nestjs.com/fundamentals/dynamic-modules)
+### Additional Sources
+
 - [NestJS Custom Providers](https://docs.nestjs.com/fundamentals/custom-providers)
 - [Zod documentation](https://zod.dev/)

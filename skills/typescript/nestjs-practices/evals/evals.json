@@ -52,6 +52,79 @@
         "Distinguishes runtime configuration validation from test strategy."
       ],
       "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Refactor a NestJS CLI runner that fetches external operations and writes them through several repositories. Keep the runner as an entrypoint, put the cross-module workflow in an explicit coordinator, and keep domain services and repositories focused on their own responsibilities.",
+      "expected_output": "A NestJS design where the CLI runner delegates to a coordinator, the coordinator owns cross-module orchestration, services remain domain-focused, and repositories remain persistence-focused.",
+      "expectations": [
+        "Keeps the CLI runner limited to invoking an application flow.",
+        "Introduces or uses an explicit coordinator for cross-module workflow decisions.",
+        "Does not move persistence queries into the coordinator or runner.",
+        "Does not combine unrelated domain responsibilities in one service."
+      ],
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Refactor a NestJS OrdersService that contains Drizzle table references, query operators, and transaction logic. Move persistence access behind a repository while preserving a domain-oriented service API and supporting an existing transaction executor.",
+      "expected_output": "A repository-oriented design that keeps Drizzle persistence details and transaction executor handling outside the service while preserving a domain-oriented service API.",
+      "expectations": [
+        "Moves Drizzle table references, operators, and query shapes into a repository.",
+        "Keeps the service dependent on a domain-oriented repository API.",
+        "Allows repository operations participating in an existing transaction to accept its executor.",
+        "Does not create an independent transaction inside a repository operation that joins an existing transaction."
+      ],
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "Implement a NestJS command-line worker that runs a SyncCoordinator once and exits. It has no HTTP interface. Show bootstrap, provider resolution, cleanup, and error behavior without adding controllers, routes, or HTTP tests.",
+      "expected_output": "A standalone NestJS application context that resolves the entry provider, runs it, and closes reliably without introducing an HTTP server.",
+      "expectations": [
+        "Uses NestFactory.createApplicationContext rather than NestFactory.create.",
+        "Resolves and invokes the worker or runner provider.",
+        "Closes the application context in a finally block.",
+        "Does not add HTTP routes, controllers, or HTTP tests merely to run the worker."
+      ],
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "Correct a NestJS provider that logs errors through console.error with interpolated account data and assumes a caught value has a message. Use injected structured logging, narrow the caught value safely, and avoid exposing secrets or complete sensitive payloads.",
+      "expected_output": "A NestJS error-handling example with structured context, a stable message, safe narrowing of unknown caught values, and no sensitive data disclosure.",
+      "expectations": [
+        "Uses an injected runtime logger rather than console output.",
+        "Uses a stable log message and structured variable context.",
+        "Treats the caught value as unknown and narrows it before reading properties.",
+        "Does not log secrets, tokens, passwords, or complete sensitive payloads."
+      ],
+      "files": []
+    },
+    {
+      "id": 9,
+      "prompt": "Implement a NestJS client for an external operations provider. Validate the outgoing request, validate the received payload, normalize it to an internal OperationRecord, and keep raw provider data away from domain logic and persistence.",
+      "expected_output": "An integration-boundary example that validates request and response contracts and maps validated provider data to an internal model.",
+      "expectations": [
+        "Validates outgoing input before the transport call.",
+        "Validates the incoming provider response before it reaches domain logic.",
+        "Normalizes validated provider data to an internal record or model.",
+        "Does not persist or return raw provider payloads."
+      ],
+      "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "Design a NestJS DatabaseModule for Drizzle. It must construct and close the client centrally, use a stable explicit token, obtain configuration through NestJS configuration providers, export the database provider, and keep business services dependent on repositories instead of the client.",
+      "expected_output": "A NestJS database module with centralized Drizzle lifecycle, a stable injection token, configuration through providers, an exported database provider, and repositories as the business-service boundary.",
+      "expectations": [
+        "Creates the Drizzle client in one database module rather than in each consumer.",
+        "Exposes the client through a stable explicit dependency-injection token.",
+        "Obtains database configuration through NestJS configuration providers.",
+        "Exports the database provider and owns connection shutdown.",
+        "Does not make business services construct or inject the database client directly."
+      ],
+      "files": []
     }
   ]
 }

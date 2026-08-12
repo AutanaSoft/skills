@@ -1,7 +1,7 @@
 ---
 title: Isolate external configuration sources
 impact: HIGH
-impactDescription:
+impactDescription: >-
   Prevents application consumers from coupling business logic to environment variables, secret
   providers, or deployment mechanisms.
 tags: nestjs, configuration, dependency-injection, environment
@@ -74,7 +74,8 @@ Keep the module option contract at its registration boundary with
 [typed namespaced injection](./config-inject-namespaced-configuration.md) when the source becomes
 application configuration.
 
-References:
+Reference: [NestJS Custom Providers](https://docs.nestjs.com/fundamentals/custom-providers)
 
-- [NestJS Custom Providers](https://docs.nestjs.com/fundamentals/custom-providers)
+### Additional Sources
+
 - [NestJS Dynamic Modules](https://docs.nestjs.com/fundamentals/dynamic-modules)

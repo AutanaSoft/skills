@@ -1,7 +1,7 @@
 ---
 title: Build and validate namespaced configuration
 impact: HIGH
-impactDescription:
+impactDescription: >-
   Prevents partial, inconsistent, or invalid runtime configuration from reaching application
   consumers.
 tags: nestjs, configuration, validation, register-as
@@ -94,8 +94,9 @@ Register the namespace in the application context described by
 and inject it through the typed contract described by
 [Inject typed namespaced configuration](./config-inject-namespaced-configuration.md).
 
-References:
+Reference: [NestJS Configuration](https://docs.nestjs.com/techniques/configuration)
 
-- [NestJS Configuration](https://docs.nestjs.com/techniques/configuration)
+### Additional Sources
+
 - [`registerAs` declaration in `@nestjs/config` 4.0.4](https://unpkg.com/@nestjs/config@4.0.4/dist/utils/register-as.util.d.ts)
 - [Zod documentation](https://zod.dev/)

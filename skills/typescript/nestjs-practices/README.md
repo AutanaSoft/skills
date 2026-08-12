@@ -6,8 +6,11 @@ and maintenance.
 
 ## Structure
 
-- `SKILL.md` - Activation and rule index.
-- `references/` - Active atomic rule cards.
+- `SKILL.md` - Activation, workflow, and rule navigation.
+- `agents/openai.yaml` - OpenAI discovery metadata and default invocation prompt.
+- `references/` - Active atomic normative rule cards.
+- `evals/trigger-evals.json` - Positive and negative activation cases.
+- `evals/evals.json` - Behavioral contract evaluations.
 
 ## Domains and Prefixes
 
@@ -60,6 +63,9 @@ in the implementation plan; do not add aliases or duplicate guidance when extend
 1. Confirm that a proposed rule belongs to NestJS rather than TypeScript, Zod, or Drizzle.
 2. Add or update an atomic card in `references/`.
 3. Use an accepted impact, at most four tags, focused examples, and an official HTTPS source.
-4. Update `SKILL.md` and this inventory when the catalog changes.
+4. Update `SKILL.md`, this inventory, and relevant evals when activation, behavior, or the catalog
+   changes.
+5. Run the portable validator and repository formatting and lint checks before synchronizing the
+   skill.
 
 End-to-end testing conventions are outside this catalog's scope.

@@ -1,8 +1,8 @@
 ---
 title: Provide Drizzle through a NestJS database module
 impact: HIGH
-impactDescription:
-  Centralizes database client lifecycle, configuration, and dependency-injection tokens
+impactDescription: >-
+  Centralizes database client lifecycle, configuration, and dependency-injection tokens.
 tags: nestjs, drizzle, database, dependency-injection
 ---
 

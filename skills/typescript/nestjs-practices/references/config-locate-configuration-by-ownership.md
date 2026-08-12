@@ -1,7 +1,7 @@
 ---
 title: Locate configuration by architectural ownership
 impact: MEDIUM
-impactDescription:
+impactDescription: >-
   Keeps configuration discoverable without imposing a repository-wide folder that conflicts with
   project architecture.
 tags: nestjs, configuration, architecture, file-organization
@@ -19,8 +19,7 @@ stronger owner exists. Feature-owned configuration may live inside its module. K
 their owner, and extract them only when there is real reuse and a clear owner. Avoid vague global
 folders that hide ownership.
 
-**Incorrect (moves feature-owned configuration to a global folder only because the path is
-universal):**
+**Incorrect (moves feature-owned configuration to a global folder without an ownership reason):**
 
 ```text
 src/

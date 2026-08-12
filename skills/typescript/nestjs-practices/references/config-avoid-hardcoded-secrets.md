@@ -1,7 +1,7 @@
 ---
 title: Keep secrets out of source and diagnostics
 impact: CRITICAL
-impactDescription:
+impactDescription: >-
   Prevents credential disclosure through source code, defaults, logs, errors, or serialized
   configuration.
 tags: nestjs, configuration, secrets, security
@@ -60,7 +60,8 @@ Keep construction and final validation in
 and isolate external secret providers with
 [Isolate external configuration sources](./config-isolate-external-configuration-sources.md).
 
-References:
+Reference: [NestJS Configuration](https://docs.nestjs.com/techniques/configuration)
 
-- [NestJS Configuration](https://docs.nestjs.com/techniques/configuration)
+### Additional Sources
+
 - [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
