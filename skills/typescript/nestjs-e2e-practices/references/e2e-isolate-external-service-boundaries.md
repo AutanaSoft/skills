@@ -87,7 +87,5 @@ E2E environment so every feature sees one explicit boundary policy.
 - [Run the real application and isolated infrastructure](./e2e-run-real-application-and-infrastructure.md)
 - [Build realistic E2E data and assert public contracts](./e2e-build-data-and-assert-contracts.md)
 
-### References
-
-- [NestJS custom providers](https://docs.nestjs.com/fundamentals/custom-providers)
-- [NestJS testing overrides](https://docs.nestjs.com/fundamentals/testing)
+Reference: [NestJS custom providers](https://docs.nestjs.com/fundamentals/custom-providers) and
+[NestJS testing overrides](https://docs.nestjs.com/fundamentals/testing).

@@ -93,9 +93,7 @@ hardcoding one package manager.
 - [Orchestrate E2E execution and lifecycle explicitly](./e2e-orchestrate-execution-and-lifecycle.md)
 - [Isolate only external service boundaries in E2E tests](./e2e-isolate-external-service-boundaries.md)
 
-### References
-
-- [NestJS testing](https://docs.nestjs.com/fundamentals/testing)
-- [NestJS lifecycle events](https://docs.nestjs.com/fundamentals/lifecycle-events)
-- [NestJS Fastify adapter](https://docs.nestjs.com/techniques/performance)
-- [Prisma migrate deploy](https://www.prisma.io/docs/orm/reference/prisma-cli-reference#migrate-deploy)
+Reference: [NestJS testing](https://docs.nestjs.com/fundamentals/testing),
+[NestJS lifecycle events](https://docs.nestjs.com/fundamentals/lifecycle-events),
+[NestJS Fastify adapter](https://docs.nestjs.com/techniques/performance), and
+[Prisma migrate deploy](https://www.prisma.io/docs/orm/reference/prisma-cli-reference#migrate-deploy).
