@@ -49,6 +49,95 @@
       "expected_output": "The nestjs-e2e-practices skill should not activate because this is a pure unit-testing task without an HTTP E2E boundary.",
       "expectations": ["Does not recommend E2E orchestration or infrastructure for the unit test"],
       "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "We have NestJS E2E coverage for auth, users, and billing. All features share one application instance, one temporary PostgreSQL database, migrations, and final cleanup. Should every feature be a Jest-discovered E2E entry point?",
+      "expected_output": "Use one Jest-discovered main orchestrator to own the shared application and database lifecycle, then register feature suites beneath it.",
+      "expectations": [
+        "Recommends one main Jest-discovered orchestrator",
+        "Places shared app, temporary database, migration, and teardown ownership with that orchestrator",
+        "Allows feature suites to be registered or imported without independently owning the shared lifecycle"
+      ],
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Our auth and billing E2E suites each create their own NestJS app, isolated temporary PostgreSQL database, fixtures, state, and teardown. Can both be Jest-discovered test owners, or must we add one global main orchestrator?",
+      "expected_output": "Multiple Jest-discovered suite owners are acceptable when the suites are fully isolated; do not require a global main orchestrator solely as a convention.",
+      "expectations": [
+        "Recognizes that each suite owns an independent app, database, state, and teardown",
+        "Allows multiple Jest-discovered owners for the isolated suites",
+        "Does not require a global main orchestrator when no lifecycle is shared"
+      ],
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "In a NestJS E2E run, test B signs in as a user created by test A. The tests are separate scenarios and the dependency was not designed as a workflow. Is this acceptable?",
+      "expected_output": "Reject the accidental cross-test dependency and require test B to establish its own required state or use an explicitly modeled flow.",
+      "expectations": [
+        "Rejects relying on a user created by an unrelated prior test",
+        "Identifies the dependency as order-coupled or accidental",
+        "Recommends independent setup or an explicitly intentional flow"
+      ],
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "Design NestJS E2E coverage for the intentional sequence register, verify email, then sign in. Later steps need the registered email and verification token. Must each step recreate all state independently?",
+      "expected_output": "An intentional sequential flow may share a typed flow context containing the values produced by earlier steps while retaining clear lifecycle ownership.",
+      "expectations": [
+        "Accepts the register-to-verify-to-sign-in sequence as an intentional flow",
+        "Allows a typed shared flow context for email, token, or other produced values",
+        "Does not require each step to recreate state when that would break the intended workflow"
+      ],
+      "files": []
+    },
+    {
+      "id": 9,
+      "prompt": "A NestJS pagination E2E test needs 500 users. May the suite insert those users through the real persistence layer before making HTTP requests to the paginated endpoint? State the constraints.",
+      "expected_output": "Accept a controlled seed through real persistence when it is limited to prerequisite data, deterministic, isolated, and cleaned up; keep the endpoint behavior under test observable through HTTP.",
+      "expectations": [
+        "Accepts controlled real-persistence seeding for pagination prerequisites",
+        "Requires deterministic and isolated seed data with cleanup",
+        "Distinguishes prerequisite seeding from bypassing the behavior being tested",
+        "Retains HTTP-level verification of pagination behavior"
+      ],
+      "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "For a registration E2E test, we will insert a user directly into the database and then assert that registration created that user. Is this a valid seed strategy?",
+      "expected_output": "Reject the setup because it bypasses the registration behavior while claiming to verify it; exercise registration through its public boundary instead.",
+      "expectations": [
+        "Rejects directly inserting the user that registration is supposed to create",
+        "Explains that the seed bypasses the behavior under test",
+        "Requires exercising registration through its public HTTP contract"
+      ],
+      "files": []
+    },
+    {
+      "id": 11,
+      "prompt": "Review this NestJS E2E assertion: expect(usersService.create).toHaveBeenCalled(). What should replace it?",
+      "expected_output": "Reject the internal service-call assertion and verify an observable public contract or persisted effect instead.",
+      "expectations": [
+        "Rejects asserting that usersService.create was called",
+        "Recommends asserting the public HTTP response or error contract",
+        "Allows verification of an observable persisted effect where relevant"
+      ],
+      "files": []
+    },
+    {
+      "id": 12,
+      "prompt": "Our password recovery E2E coverage exercises request reset, capture the delivery, verify the token, and set a new password across several HTTP endpoints. Should these tests be split into one file per endpoint?",
+      "expected_output": "Accept the suite as a cohesive password-recovery business flow; do not require one file per endpoint when the endpoints form one intentional user journey.",
+      "expectations": [
+        "Recognizes password recovery as a cohesive business flow",
+        "Accepts coverage spanning multiple HTTP endpoints in one flow suite",
+        "Does not require one file per endpoint solely because multiple endpoints are involved"
+      ],
+      "files": []
     }
   ]
 }
