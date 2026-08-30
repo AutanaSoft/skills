@@ -31,18 +31,37 @@ sources.
 Do not apply this skill to unit tests, repository-only integration tests, black-box tests against
 deployed APIs without NestJS source access, non-NestJS APIs, or browser-only UI testing.
 
-## Hard Rules
+## Rule Categories by Priority
 
-- Inspect the target project's production bootstrap, test runner, commands, authentication,
-  persistence, migrations, and external dependencies before choosing an implementation.
-- Exercise public HTTP endpoints with the real application graph and real persistence.
-- Use one runner-discovered main orchestrator, then register feature orchestrators and endpoint
-  suites explicitly.
-- Substitute only justified out-of-process adapters. Keep controllers, guards, application services,
-  repositories, authentication, ORM, and database real.
-- Never point destructive E2E lifecycle operations at shared development or production resources.
-- Preserve project choices for HTTP adapter, validator, ORM, runner, HTTP client, and package
-  manager.
+### CRITICAL — Execution and lifecycle
+
+Select the orchestration card for runner discovery, lifecycle ownership, shared state, ordered
+flows, or teardown.
+
+### CRITICAL — Runtime and infrastructure
+
+Select the runtime card for production-derived bootstrap, real HTTP and persistence, isolated
+infrastructure, migrations, or authentication.
+
+### CRITICAL — External service boundaries
+
+Select the external-boundary card for controlled substitution of out-of-process dependencies while
+keeping the application internals real.
+
+### HIGH — Data and public contracts
+
+Select the data and contracts card for fixtures, seeds, payload variants, observable effects, or
+public API assertions.
+
+## Quick Reference
+
+- `e2e-orchestrate-execution-and-lifecycle` - Own discovery, lifecycle scope, typed flow context,
+  registration, and teardown.
+- `e2e-run-real-application-and-infrastructure` - Run the production-like NestJS application with
+  real, isolated infrastructure.
+- `e2e-build-data-and-assert-contracts` - Select HTTP setup or deterministic bounded seeds and
+  verify public contracts or persisted effects.
+- `e2e-isolate-external-service-boundaries` - Substitute only justified out-of-process adapters.
 
 ## Workflow
 
@@ -53,24 +72,33 @@ deployed APIs without NestJS source access, non-NestJS APIs, or browser-only UI 
 3. Inspect Jest or the active runner's discovery, concurrency, setup, teardown, and project
    commands.
 4. Inspect database administration, migrations, authentication, and external provider boundaries.
-5. Load only the matching cards from the decision map.
-6. Design the main and feature ownership boundaries before implementing endpoint suites.
-7. Run the focused verification and then the complete main E2E orchestrator when commands exist.
+5. Load only the matching cards from How to Use.
+6. Design shared main/feature ownership or a genuinely isolated suite owner before implementing
+   suites.
+7. Run the focused verification and then the applicable complete E2E owner when commands exist.
 8. Report the Output Contract without exposing credentials, tokens, or secrets.
 
-## Decision Map
+## How to Use
 
-| Concern                                                                  | Card                                                                                                              |
-| ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| Discovery, order, Jest config, orchestrators, context, cleanup, or close | [Orchestrate E2E execution and lifecycle explicitly](references/e2e-orchestrate-execution-and-lifecycle.md)       |
-| Bootstrap, real HTTP, database, migrations, providers, or authentication | [Run the real application and isolated infrastructure](references/e2e-run-real-application-and-infrastructure.md) |
-| Fixtures, seeds, payload variants, errors, headers, effects, or secrets  | [Build realistic E2E data and assert public contracts](references/e2e-build-data-and-assert-contracts.md)         |
-| Email, payment, SMS, webhooks, or another out-of-process dependency      | [Isolate only external service boundaries in E2E tests](references/e2e-isolate-external-service-boundaries.md)    |
+Load only the card that owns the decision being made; load more than one only when the same suite
+crosses those boundaries.
+
+- For runner discovery, lifecycle ownership, shared application or database state, intentional
+  ordered flows, typed contexts, feature registration, or teardown, load
+  [Orchestrate E2E execution and lifecycle explicitly](references/e2e-orchestrate-execution-and-lifecycle.md).
+- For production-derived bootstrap, real HTTP, isolated databases, migrations, providers, or
+  authentication, load
+  [Run the real application and isolated infrastructure](references/e2e-run-real-application-and-infrastructure.md).
+- For HTTP-created fixtures, bounded real-persistence seeds, payload variants, public errors,
+  headers, effects, or forbidden fields, load
+  [Build realistic E2E data and assert public contracts](references/e2e-build-data-and-assert-contracts.md).
+- For email, payment, SMS, webhooks, or another out-of-process dependency, load
+  [Isolate only external service boundaries in E2E tests](references/e2e-isolate-external-service-boundaries.md).
 
 ## Verification
 
-- Discover the project's official command for the main E2E orchestrator.
-- Run the smallest supported focused target without bypassing the main lifecycle.
+- Discover the project's official command for the applicable E2E lifecycle owner.
+- Run the smallest supported focused target without bypassing its lifecycle.
 - Run the complete E2E project when the environment is available.
 - Run repository-defined lint, formatting, and validation for changed artifacts.
 - If infrastructure is unavailable, report the exact blocked command and unverified behavior.
@@ -80,7 +108,7 @@ deployed APIs without NestJS source access, non-NestJS APIs, or browser-only UI 
 Report all of the following:
 
 - Cards applied and files created or modified.
-- Main orchestrator, feature orchestrators, and explicit registration order.
+- Applicable lifecycle owner, imported orchestrators or suites, and any explicit registration order.
 - Real HTTP flows and internal providers exercised.
 - Isolated database, migration, and teardown strategy.
 - Data created through HTTP and every justified seed.
