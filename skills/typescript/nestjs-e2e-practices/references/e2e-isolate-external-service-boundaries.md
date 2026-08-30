@@ -79,8 +79,8 @@ expect(mailTransport.messages).toContainEqual(
 );
 ```
 
-Use the project's actual provider token and bootstrap helper. Centralize the override in the main
-E2E environment so every feature sees one explicit boundary policy.
+Use the project's actual provider token and bootstrap helper. Centralize the override in the owning
+E2E environment so every suite within that lifecycle scope sees one explicit boundary policy.
 
 ### Related cards
 
